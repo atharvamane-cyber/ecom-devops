@@ -317,6 +317,25 @@ func createClient(ctx context.Context, svcAddr string) (*grpc.ClientConn, error)
 }
 
 
+// Dummy change for CI/CD GitOps testing
+const dummyVariable = "GitOpsTest"
+
+func initResource() *sdkresource.Resource {
+	initResourcesOnce.Do(func() {
+		extraResources, _ := sdkresource.New(
+			context.Background(),
+			sdkresource.WithOS(),
+			sdkresource.WithProcess(),
+			sdkresource.WithContainer(),
+			sdkresource.WithHost(),
+		)
+		resource, _ = sdkresource.Merge(
+			sdkresource.Default(),
+			extraResources,
+		)
+	})
+	return resource
+}
 
 
 
