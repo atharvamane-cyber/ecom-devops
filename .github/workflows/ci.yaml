@@ -67,8 +67,8 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Docker Push
-       uses: docker/build-push-action@v6
-       with:
+        uses: docker/build-push-action@v6
+        with:
             context: src/product-catalog
             file: src/product-catalog/Dockerfile
             push: true
@@ -82,7 +82,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
 
       - name: Update Image Tag in Kubernetes Deployment
         run: |
